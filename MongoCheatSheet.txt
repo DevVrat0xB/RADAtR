@@ -1,0 +1,73 @@
+Basics of MongoDB
+
+================= Connectivity =====================
+How to connect to MongoDB (local) server (using shell)?
+    1) execute 'mongod' command
+    2) In another shell, execute 'mongo' command
+====================================================
+
+=================== Database =======================
+How to see pre-existing DBs?
+    execute 'show dbs'
+    *mind the 's' in lower-case 'd' in dbs.
+
+How to check which DB is currently in use?
+    execute 'db'
+
+How to create a DB?
+    execute 'use <nameOfTheDB>'
+    *If any DB with name 'nameOfTheDB' doesn't exits, it will be created with the same name.
+    *If the DB is empty, it doesn't get saved.
+    *If any DB with name 'nameOfTheDB' exists, it will be selected as current DB.
+
+How to delete existing DB?
+    execute 'db.dropDatabase()'
+    *only the current DB which is selected gets deleted (Switch to desired DB before executing this).
+
+How to rename a DB?
+    You can't! A hack is that you create a new DB as a copy of the old DB and then delete the old DB.
+
+How to create backup (or dump) of a DB?
+    execute 'mongodump --host <hostName> --port <portNumber>'                   (Backup of all DBs on a host).
+    execute 'mongodump --dbpath <locationOfTheDB>' --out <locationForBackup>    (Backup all DBs on a specified location).
+    execute 'mongodump --db <nameOfTheDB> --collection <nameOfTheCollection>'   (Backup a specified Collection belonging t0 a specified DB)
+    *the --out flag could be used with any of the above command
+
+How to restore a (backup) or a dump file?
+    execute 'mongorestore -d <nameOfTheDB> -c <nameOfTheCollection>'            (not completely tested due to lack of knowledge)
+
+(If mongodump or mongorestore can't be defined or found, install mongodb-tools package.)
+====================================================
+
+================= Collections ======================
+How to see all the Collections in a DB?
+    execute 'show collections'
+    *mind the 's' in lower-case 'c' in collections.
+
+How to create a Collection in a DB?
+    execute 'db.createCollection("nameOfTheCollection")
+
+How to delete a Collection from a DB?
+    execute 'db.<nameOfTheCollection>.drop()
+
+How to rename a Collection?
+    execute 'db.<nameOfTheCollection>.renameCollection("newName")
+====================================================
+
+================== Records/Queries =================
+How to insert a single data/record in a collection?
+    In 2 ways, using file/list or manually.
+    
+    (using file)
+    db.<nameOfTheCollection>.insertOne(<fileName>)
+    *the <fileName> must contain a list of key-value pairs in form of '"key":"value"'.
+    *scope of a single record is defined by curly-braces '{}'.
+
+    (manually)
+    db.<nameOfTheCollection>.insertOne({"key1" : value1", "key2" : value2})
+
+How to insert multiple records in a Collection?
+    In 3 ways, using insert(), insertMany() or manually(not preferred)
+    db.<nameOfTheCollection>.insert([<fileName1>, <fileName2>, <fileName3>]) or
+    db.<nameOfTheCollection>.insertMany([<fileName>, <fileName2>, <fileName3>])
+

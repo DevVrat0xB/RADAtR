@@ -1,0 +1,6 @@
+.idea/
+venv/
+testFile*.py
+__pycache__/
+Detached/Global/Configurations/UserVariables.py
+Detached/Global/Configurations/LocalUsersConfigurations.py
